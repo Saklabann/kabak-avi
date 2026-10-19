@@ -54,6 +54,9 @@
     border:1px solid var(--line); border-radius:12px; padding:10px 8px 9px; }
   .stat .v { font-size:21px; font-weight:900; color:var(--glow); line-height:1.05; letter-spacing:-.3px; }
   .stat .l { font-size:9px; letter-spacing:1.7px; color:var(--muted); text-transform:uppercase; margin-top:4px; }
+  #menuScreen .stats { grid-template-columns:repeat(6, 1fr); }
+  @media (max-width:940px) { #menuScreen .stats { grid-template-columns:repeat(3, 1fr); } }
+  @media (max-width:520px) { #menuScreen .stats { grid-template-columns:repeat(2, 1fr); } }
   #shopScreen .stats { max-width:200px; }
   #deathScreen .stats { max-width:660px; }
 
@@ -165,11 +168,11 @@
   .tbLinks a { color:#c9ae8b; text-decoration:none; font-size:11px; font-weight:800; letter-spacing:1.4px;
     text-transform:uppercase; padding:9px 12px; border-radius:9px; transition:.16s; }
   .tbLinks a:hover { color:var(--glow); background:rgba(255,178,74,.1); }
-  @media (max-width:880px) { .tbLinks { display:none; } }
+  @media (max-width:860px) { .tbLinks { display:none; } }
 
   .hero { display:grid; grid-template-columns:1.02fr .98fr; gap:34px; align-items:center;
     width:100%; margin:22px 0 6px; }
-  @media (max-width:960px) { .hero { grid-template-columns:1fr; gap:22px; margin-top:14px; } }
+  @media (max-width:860px) { .hero { grid-template-columns:1fr; gap:22px; margin-top:14px; } }
   .heroL { display:flex; flex-direction:column; align-items:flex-start; }
   .chip { display:inline-block; padding:7px 16px; border-radius:999px; border:1px solid var(--line);
     background:rgba(255,178,74,.06); color:#e9cfa4; font-size:10px; font-weight:800;
@@ -264,7 +267,7 @@
       <div class="heroR">
         <div class="frameshot">
           <canvas id="menuArt" width="1040" height="660"></canvas>
-          <div class="shotcap">Sezon 2 · Balkabağı Bahçesi — 2 oyuncu, canlı ortam</div>
+          <div class="shotcap">Sezon 2 · Balkabağı Bahçesi — canlı ortam</div>
         </div>
       </div>
     </div>
