@@ -66,6 +66,7 @@ dekorlar, canavarlar, müzik ve ses efektleri.
 | 🏆 **15 başarım · kombo sayacı · sefer özeti** | İlerleme kaydedilir (`localStorage`) |
 | 🦉 **Bilge Baykuş** | Her katın başında ipucu veren rehber |
 | 🌧️ **Canlı dünya** | Yaprak burgaçları, mum dumanı, gece ateşböcekleri, kuş sürüleri, şimşek + gök gürültüsü, yağmur sesi |
+| 🎨 **Yenilenen arayüz** | Cam paneller, amber gradyanlar ve yuvarlatılmış kartlar; üst-ortada boss can barı |
 | 📱 **Dokunmatik destek** | Telefonda sanal joystick ve aksiyon düğmeleri |
 | 👥 **Yerel kooperatif** | İki oyuncu da ölünce sefer biter; 2. oyuncu botu akıllıdır |
 

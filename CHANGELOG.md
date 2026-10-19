@@ -31,6 +31,12 @@ Biçim: [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/) · Sürümleme:
 - Adım sesleri (toz ve çamur izleriyle senkron)
 
 **Arayüz ve sistemler**
+- **Arayüz baştan tasarlandı** — tanıtım sayfasıyla aynı tasarım dili (cam paneller, amber vurgular, yuvarlatılmış kartlar):
+  - Ana menü: kabak logosu, gradyan başlık, istatistik kartları, hap biçimli ayar düğmeleri,
+    katlanabilir bilgi kartları ve süzülen sonbahar yaprakları
+  - HUD: kalp/altın kutusu, kat-süre paneli ve silah göstergesi artık cam kart içinde; boss can barı üst-ortaya taşındı
+  - Duraklatma, ölüm, mağaza ekranları ile Av Haritası ve yadigâr seçim ekranları yeni tasarıma uyarlandı
+  - Tüm başlıklar "Segoe UI 900" + amber gradyan; ince çerçeveli yuvarlatılmış kartlar
 - Tüccarda **vitrin yenileme tezgahı** (🎲 8✦)
 - HUD'a **sefer süresi** sayacı ve **FPS** göstergesi
 - Ayarlar: **hasar sayıları** aç/kapa, **FPS** aç/kapa, **tam ekran** düğmesi
@@ -56,6 +62,10 @@ Biçim: [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/) · Sürümleme:
 ### Düzeltildi
 - `updateEnemies` geri döngüsünde ölü düşman koruması (`if (!e) continue`)
 - Ana döngü try/catch + hata sayacı: tek kare hatası artık oyunu kilitlemez
+- **Negatif `dt` koruması:** zaman damgası geriye döndüğünde (sekme/pencereler arası geçiş) şimşek küresinin
+  yarıçapı negatif hesaplanıp kare hatası üretiyordu (`arc` IndexSizeError) — `dt` artık alt sınırı 0,
+  yarıçaplar güvenli aralıkta
+- **Şarj göstergesi** çizimi: gölgelenen `W` değişkeni yüzünden şarj barı ve etiketi ekran dışına çiziliyordu — düzeltildi
 - Eski kayıtlar (Sezon 1) otomatik göç ettirilir; ilerleme kaybı yok
 
 ---
