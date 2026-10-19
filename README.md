@@ -12,7 +12,7 @@ Tarayıcıda çalışır; kurulum, bağımlılık ve internet bağlantısı iste
 [![Tek Dosya](https://img.shields.io/badge/tek%20dosya-ba%C4%9F%C4%B1ml%C4%B1l%C4%B1ks%C4%B1z-8b5cf6?style=for-the-badge)](oyna.html)
 [![Dil](https://img.shields.io/badge/dil-T%C3%BCrk%C3%A7e-ffb24a?style=for-the-badge)](#)
 
-[**▶ Hemen Oyna**](__PAGES__oyna.html) · [Ekranlar](#-ekran-görüntüleri) · [Kontroller](#%EF%B8%8F-kontroller) · [Hata Bildir](../../issues/new?template=bug_report.md) · [Öneri Ver](../../issues/new?template=feature_request.md)
+[**▶ Hemen Oyna**](https://saklabann.github.io/kabak-avi/oyna.html) · [Ekranlar](#-ekran-görüntüleri) · [Kontroller](#%EF%B8%8F-kontroller) · [Hata Bildir](../../issues/new?template=bug_report.md) · [Öneri Ver](../../issues/new?template=feature_request.md)
 
 </div>
 
@@ -131,7 +131,7 @@ dekorlar, canavarlar, müzik ve ses efektleri.
 Depoyu klonlayarak:
 
 ```bash
-git clone https://github.com/__OWNER__/kabak-avi.git
+git clone https://github.com/Saklabann/kabak-avi.git
 cd kabak-avi
 # oyna.html dosyasını tarayıcıda aç
 ```

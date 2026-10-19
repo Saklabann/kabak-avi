@@ -85,5 +85,5 @@ Biçim: [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/) · Sürümleme:
 
 ---
 
-[2.0.0]: https://github.com/__OWNER__/kabak-avi/compare/v1.0.0...v2.0.0
-[1.0.0]: https://github.com/__OWNER__/kabak-avi/releases/tag/v1.0.0
+[2.0.0]: https://github.com/Saklabann/kabak-avi/compare/v1.0.0...v2.0.0
+[1.0.0]: https://github.com/Saklabann/kabak-avi/releases/tag/v1.0.0
