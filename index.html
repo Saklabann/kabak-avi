@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KABAK AVI — Sonbahar Büyücüsü · Tarayıcıda 2D Aksiyon Roguelite</title>
+<meta name="description" content="KABAK AVI — Sonbahar Büyücüsü: tek dosyalık, prosedürel sonbahar temalı 2D aksiyon roguelite. Silah düşür-değiştir-fırlat, parçalanabilir patronlar, yolsuzluk zinciri, av haritası ve yerel 2 kişilik kooperatif. Kurulum yok, tarayıcıda oyna.">
+<meta name="theme-color" content="#120a05">
+<meta property="og:type" content="website">
+<meta property="og:title" content="KABAK AVI — Sonbahar Büyücüsü">
+<meta property="og:description" content="Tek dosyalık, prosedürel sonbahar temalı 2D aksiyon roguelite. Kurulum yok — tarayıcıda oyna.">
+<meta property="og:image" content="assets/screens/bahce.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.92em' font-size='88'>🎃</text></svg>">
+<style>
+  :root{
+    --bg:#120a05; --bg2:#1a1008; --panel:#1e140b; --line:rgba(255,178,74,.16);
+    --amber:#ffb24a; --orange:#ff7a2f; --glow:#ffd98a; --text:#f3e5cf; --muted:#bda183;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,-apple-system,Roboto,sans-serif;line-height:1.6;overflow-x:hidden}
+  a{color:var(--amber);text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+  /* ---------- üst menü ---------- */
+  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);background:rgba(18,10,5,.82);border-bottom:1px solid var(--line)}
+  nav{display:flex;align-items:center;gap:18px;padding:12px 0}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:1px;font-size:17px}
+  .logo .pk{font-size:24px;filter:drop-shadow(0 0 10px rgba(255,138,31,.6))}
+  nav .mid{margin-left:auto;display:flex;gap:18px;font-size:14px}
+  nav .mid a{color:var(--muted)}
+  nav .mid a:hover{color:var(--glow)}
+  .btn{display:inline-block;border-radius:12px;padding:11px 20px;font-weight:800;font-size:14px;letter-spacing:.4px;
+    border:1px solid transparent;transition:transform .15s ease, box-shadow .2s ease, background .2s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn.primary{background:linear-gradient(180deg,#ffb24a,#ff7a2f);color:#2a1405;box-shadow:0 8px 26px -10px rgba(255,138,31,.85)}
+  .btn.primary:hover{box-shadow:0 12px 30px -8px rgba(255,138,31,.95)}
+  .btn.ghost{border-color:var(--line);color:var(--text);background:rgba(255,178,74,.06)}
+  .btn.ghost:hover{background:rgba(255,178,74,.13)}
+  nav .btn{padding:9px 16px;font-size:13px}
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding:72px 0 40px;overflow:hidden}
+  .hero:before{content:"";position:absolute;inset:-40% -20% auto -20%;height:150%;
+    background:radial-gradient(60% 50% at 50% 20%,rgba(255,122,47,.22),transparent 70%);pointer-events:none}
+  .kicker{display:inline-block;font-size:12px;letter-spacing:3px;color:var(--amber);border:1px solid var(--line);
+    border-radius:999px;padding:6px 14px;margin-bottom:18px;background:rgba(255,178,74,.07)}
+  h1{font-size:clamp(38px,7vw,76px);line-height:1.03;font-weight:900;letter-spacing:-.5px;
+    background:linear-gradient(180deg,#fff3dd,#ffb24a 55%,#ff7a2f);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{margin-top:14px;font-size:clamp(15px,2.2vw,19px);color:var(--muted);max-width:640px}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:34px;align-items:center}
+  .shot-frame{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);
+    box-shadow:0 30px 70px -30px rgba(0,0,0,.95), 0 0 0 1px rgba(255,217,138,.06) inset}
+  .shot-frame img{display:block;width:100%;height:auto}
+  .shot-frame figcaption{position:absolute;left:0;right:0;bottom:0;padding:10px 14px;font-size:12px;color:#ffd98a;
+    background:linear-gradient(transparent,rgba(10,6,2,.85))}
+  /* ---------- sayaç şeridi ---------- */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:44px 0 10px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .stat b{display:block;font-size:26px;color:var(--glow);font-weight:900}
+  .stat span{font-size:12.5px;color:var(--muted)}
+  /* ---------- bölümler ---------- */
+  section{padding:56px 0}
+  h2{font-size:clamp(24px,3.6vw,34px);font-weight:900;letter-spacing:-.2px}
+  h2 .dot{color:var(--orange)}
+  .lead{color:var(--muted);margin-top:8px;max-width:760px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:28px}
+  .card{background:linear-gradient(180deg,rgba(255,178,74,.05),rgba(255,178,74,.015));border:1px solid var(--line);
+    border-radius:16px;padding:20px;transition:transform .16s ease,border-color .2s}
+  .card:hover{transform:translateY(-3px);border-color:rgba(255,178,74,.34)}
+  .card .ic{font-size:26px}
+  .card h3{font-size:16.5px;margin:10px 0 6px;font-weight:800}
+  .card p{font-size:14px;color:var(--muted)}
+  .band{background:linear-gradient(180deg,rgba(255,122,47,.08),transparent);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-top:28px}
+  .shots a{border-radius:14px;overflow:hidden;border:1px solid var(--line);display:block;position:relative}
+  .shots img{display:block;width:100%;transition:transform .35s ease}
+  .shots a:hover img{transform:scale(1.035)}
+  .shots a span{position:absolute;left:10px;bottom:10px;font-size:12px;font-weight:800;color:#ffe9c2;
+    background:rgba(12,7,3,.72);border:1px solid var(--line);padding:4px 10px;border-radius:999px}
+  /* ---------- kontroller ---------- */
+  .keys{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+  .keys table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .keys caption{font-weight:800;text-align:left;padding:0 0 8px;color:var(--glow)}
+  .keys td{padding:9px 14px;border-bottom:1px solid rgba(255,178,74,.08);font-size:14px}
+  .keys td:first-child{width:130px;color:var(--muted)}
+  kbd{background:#2a1b0e;border:1px solid rgba(255,178,74,.34);border-bottom-width:2px;border-radius:7px;
+    padding:2px 8px;font:800 12.5px "Segoe UI",sans-serif;color:#ffd98a}
+  /* ---------- düşen yapraklar ---------- */
+  .leaves{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+  .leaves i{position:absolute;top:-8vh;font-size:16px;opacity:.5;animation:fall linear infinite}
+  @keyframes fall{0%{transform:translateY(-10vh) rotate(0)}100%{transform:translateY(115vh) rotate(420deg)}}
+  .leaves i:nth-child(1){left:6%;animation-duration:15s;animation-delay:0s}
+  .leaves i:nth-child(2){left:18%;animation-duration:19s;animation-delay:3s}
+  .leaves i:nth-child(3){left:31%;animation-duration:13s;animation-delay:6s}
+  .leaves i:nth-child(4){left:44%;animation-duration:21s;animation-delay:1.5s}
+  .leaves i:nth-child(5){left:57%;animation-duration:16s;animation-delay:8s}
+  .leaves i:nth-child(6){left:69%;animation-duration:18s;animation-delay:4s}
+  .leaves i:nth-child(7){left:81%;animation-duration:14s;animation-delay:10s}
+  .leaves i:nth-child(8){left:92%;animation-duration:20s;animation-delay:2s}
+  .content{position:relative;z-index:1}
+  footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:13.5px}
+  footer .cols{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+  @media(max-width:860px){
+    .hero-grid{grid-template-columns:1fr}
+    .keys{grid-template-columns:1fr}
+    nav .mid{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="leaves" aria-hidden="true"><i>🍂</i><i>🍁</i><i>🍂</i><i>🍁</i><i>🍂</i><i>🍁</i><i>🍂</i><i>🍁</i></div>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="logo" href="#"><span class="pk">🎃</span> KABAK AVI</a>
+      <div class="mid">
+        <a href="#ozellikler">Özellikler</a>
+        <a href="#ekranlar">Ekranlar</a>
+        <a href="#kontroller">Kontroller</a>
+        <a href="#sezon2">Sezon 2</a>
+        <a href="__GH__">GitHub</a>
+      </div>
+      <a class="btn primary" href="oyna.html">▶ Oyna</a>
+    </nav>
+  </div>
+</header>
+
+<main class="content">
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="kicker">TEK DOSYA · KURULUM YOK · TÜRKÇE</span>
+        <h1>KABAK AVI<br>Sonbahar Büyücüsü</h1>
+        <p class="sub">Prosedürel üretilen balkabağı diyarlarında geçen, tarayıcıda çalışan 2D aksiyon roguelite.
+          Silahını al, düşmandan kap, tükenince fırlat. Patronların parçalarını kır, yolsuzluğu zincirle, av haritasından
+          bir sonraki bölgeyi seç. İstersen yanına bir yoldaş al — yerel 2 kişilik!</p>
+        <div class="cta">
+          <a class="btn primary" href="oyna.html">▶ Hemen Oyna</a>
+          <a class="btn ghost" href="#ozellikler">Özellikler</a>
+          <a class="btn ghost" href="__GH__">GitHub Deposu</a>
+        </div>
+      </div>
+      <figure class="shot-frame">
+        <img src="assets/screens/bahce.jpg" alt="Balkabağı Bahçesi'nde savaş" width="1000" height="700">
+        <figcaption>KAT 3 · Balkabağı Bahçesi — 2 oyuncu, elit avcılar ve canlı ortam</figcaption>
+      </figure>
+    </div>
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat"><b>4</b><span>biyom · 4 patron</span></div>
+        <div class="stat"><b>29</b><span>relic (yadigâr)</span></div>
+        <div class="stat"><b>10</b><span>kalıcı kutsama</span></div>
+        <div class="stat"><b>5+4</b><span>sınıf · evcil hayvan</span></div>
+        <div class="stat"><b>15</b><span>başarım</span></div>
+        <div class="stat"><b>7</b><span>silah · mühimmat</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÖZELLİKLER -->
+  <section id="ozellikler">
+    <div class="wrap">
+      <h2>Voidigo'dan ilham, kendi kimliğiyle<span class="dot">.</span></h2>
+      <p class="lead">Her şey koddan üretilir: zeminler, duvarlar, dekor, sesler ve canavarlar. Harici dosya, kütüphane
+        veya internet bağlantısı gerekmez — tek HTML dosyasını çift tıkla, oyun başlar.</p>
+      <div class="grid">
+        <div class="card"><div class="ic">🔫</div><h3>Düşür · Değiştir · Fırlat</h3><p>Düşmanlar silah düşürür, mühimmat biter, silah kırılır. Yerden al, kuşan ya da düşmana fırlat.</p></div>
+        <div class="card"><div class="ic">🦴</div><h3>Parçalanabilir Patronlar</h3><p>Korkuluk'un kolları, Kemik Lordu'nun kaburgası, cadının büyü küresi... Parçaları kır, patronu güçsüz bırak.</p></div>
+        <div class="card"><div class="ic">🟣</div><h3>Yolsuzluk Zinciri</h3><p>Vuruşlar yolsuzluk yükler; dolan düşman patlar ve zincirleme çevreye yayılır.</p></div>
+        <div class="card"><div class="ic">🗺️</div><h3>Av Haritası</h3><p>Her kat sonunda 3 bölge arasından seçim: bahçe, koru, kemik tarlası veya cadı vadisi.</p></div>
+        <div class="card"><div class="ic">🧙</div><h3>5 Sınıf + 4 Evcil Hayvan</h3><p>Büyücü, karakabak, cüce demirci, cadı kızı, çılgın palyaço; yanında kedi, kuzgun, kurbağa veya yavru kabak.</p></div>
+        <div class="card"><div class="ic">👥</div><h3>Yerel 2 Kişilik</h3><p>Aynı klavyede iki oyuncu. İkinci oyuncuyu ister yapay zekâya bırak, ister ok tuşlarıyla devral.</p></div>
+        <div class="card"><div class="ic">👑</div><h3>Elit Rütbeler</h3><p>ZIRHLI hasarı emer, HIZLI seni kovalar, ZEHİRLİ ölünce göl bırakır, KADİM daha çok altın taşır.</p></div>
+        <div class="card"><div class="ic">🧱</div><h3>Gizli Odalar</h3><p>Çatlak duvarları kır: haritada görünmeyen hazine odaları, sandık ve ganimet.</p></div>
+        <div class="card"><div class="ic">🌧️</div><h3>Canlı Dünya</h3><p>Yaprak burgaçları, mum dumanı, gece ateşböcekleri, gökyüzünde kuş sürüleri, yağmur ve şimşek.</p></div>
+        <div class="card"><div class="ic">🦉</div><h3>Bilge Baykuş</h3><p>Her katın başında duvarda tüner; bir kez konuşur, oyunun sırlarını fısıldar.</p></div>
+        <div class="card"><div class="ic">🎒</div><h3>Kalıcı İlerleme</h3><p>Ölsen de ruhlar seninle: 10 kutsama, altın ve tecrübe çarpanları, zorluk seçenekleri.</p></div>
+        <div class="card"><div class="ic">📱</div><h3>Dokunmatik Destek</h3><p>Telefonda sanal joystick ve düğmeler: dash, ışın, kullan, silah değiştir, fırlat.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EKRANLAR -->
+  <section id="ekranlar" class="band">
+    <div class="wrap">
+      <h2>Ekranlar<span class="dot">.</span></h2>
+      <p class="lead">Hepsi oyunun kendi çizim motorundan — tarayıcıda, 60 FPS.</p>
+      <div class="shots">
+        <a href="assets/screens/patron.jpg" target="_blank"><img src="assets/screens/patron.jpg" alt="Korkuluk Efendisi patron savaşı" loading="eager" width="1000" height="700"><span>Patron: Korkuluk Efendisi & kırılabilir parçalar</span></a>
+        <a href="assets/screens/yagmur.jpg" target="_blank"><img src="assets/screens/yagmur.jpg" alt="Kemik Tarlası'nda gece yağmuru" loading="eager" width="1000" height="700"><span>Kemik Tarlası: gece, yağmur, şimşek</span></a>
+        <a href="assets/screens/harita.jpg" target="_blank"><img src="assets/screens/harita.jpg" alt="Av haritası bölge seçimi" loading="eager" width="1000" height="700"><span>Av Haritası: bölge seçimi</span></a>
+        <a href="assets/screens/bahce.jpg" target="_blank"><img src="assets/screens/bahce.jpg" alt="Balkabağı Bahçesi'nde kooperatif oyun" loading="eager" width="1000" height="700"><span>Balkabağı Bahçesi: 2 oyuncu & elit düşmanlar</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTROLLER -->
+  <section id="kontroller">
+    <div class="wrap">
+      <h2>Kontroller<span class="dot">.</span></h2>
+      <p class="lead">Fare ile nişan al, tıkla ve ateş et. Klavye kısayolları seni hayatta tutar.</p>
+      <div class="keys">
+        <table>
+          <caption>1. Oyuncu</caption>
+          <tr><td><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></td><td>Hareket</td></tr>
+          <tr><td><kbd>Fare</kbd></td><td>Nişan · sol tık ateş · sağ tık ışın (beam)</td></tr>
+          <tr><td><kbd>Boşluk</kbd></td><td>Dash (hızlı kaçış / hasar)</td></tr>
+          <tr><td><kbd>E</kbd></td><td>Etkileşim: sandık, tüccar, baykuş, yer silahı</td></tr>
+          <tr><td><kbd>F</kbd> / <kbd>Q</kbd></td><td>Silah değiştir / fırlat</td></tr>
+          <tr><td><kbd>P</kbd> · <kbd>M</kbd></td><td>Duraklat · sesi kapat</td></tr>
+        </table>
+        <table>
+          <caption>2. Oyuncu (isteğe bağlı)</caption>
+          <tr><td><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd></td><td>Hareket ve nişan</td></tr>
+          <tr><td><kbd>,</kbd></td><td>Dash</td></tr>
+          <tr><td><kbd>.</kbd> / <kbd>/</kbd></td><td>Silah değiştir / fırlat</td></tr>
+          <tr><td><kbd>🤖</kbd></td><td>Yapay zekâ varsayılan açık; menüden kapatıp devralabilirsin</td></tr>
+          <tr><td><kbd>📱</kbd></td><td>Dokunmatik: sol joystick + sağ düğmeler</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEZON 2 -->
+  <section id="sezon2" class="band">
+    <div class="wrap">
+      <h2>Sezon 2 · Canlı Dünya<span class="dot">.</span></h2>
+      <p class="lead">Son güncellemeyle dünyaya hayat geldi: ortam sesleri, hava olayları ve ufak canlılar.</p>
+      <div class="grid">
+        <div class="card"><div class="ic">🍂</div><h3>Rüzgâr & Yaprak Burgaçı</h3><p>Esinti yükseldiğinde yapraklar burgaçlanır, çimenler eğilir, hafif bir uğultu duyulur.</p></div>
+        <div class="card"><div class="ic">⛈️</div><h3>Şimşek & Gök Gürültüsü</h3><p>Kemik Tarlası'nda bulutlar gürler; ekran çakar, ardından gürültü gelir. Ve yağmur sesi.</p></div>
+        <div class="card"><div class="ic">🐦</div><h3>Kuşlar & Cırcırlar</h3><p>Gündüz kuş cıvıltısı, gece cırcır sesi; gökyüzünde sürüler geçer.</p></div>
+        <div class="card"><div class="ic">🕯️</div><h3>Mum Dumanı</h3><p>Mum, meşale ve ateş çukurlarından ince duman tüter; ışık titrer.</p></div>
+        <div class="card"><div class="ic">✨</div><h3>Gece Ateşböcekleri</h3><p>Gece çöktüğünde her biyomda süzülen ateşböcekleri belirir.</p></div>
+        <div class="card"><div class="ic">🦉</div><h3>Bilge Baykuş</h3><p>Başlangıç odasında konuşan rehber: ipucu + tecrübe.</p></div>
+        <div class="card"><div class="ic">🐿️</div><h3>Sincaplar</h3><p>Bahçede ve korda koşuşan sincaplar; sen yaklaşınca kaçışırlar.</p></div>
+        <div class="card"><div class="ic">🚶</div><h3>Ayak Sesleri</h3><p>Adım sesleri, toz ve çamur izleri; koşarken yapraklar havalanır.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NASIL -->
+  <section>
+    <div class="wrap">
+      <h2>Nasıl oynanır<span class="dot">.</span></h2>
+      <div class="grid">
+        <div class="card"><div class="ic">1️⃣</div><h3>Odayı temizle</h3><p>Kapılar kilitlidir; düşmanlar bitene kadar savaş. Ödül: silah, altın, ruh.</p></div>
+        <div class="card"><div class="ic">2️⃣</div><h3>Haritayı gez</h3><p>Mini harita sağ altta; hazine ve tüccar odalarını bul, gizli duvarları kır.</p></div>
+        <div class="card"><div class="ic">3️⃣</div><h3>Yadigâr seç</h3><p>Her kat sonunda 3 yadigârdan birini seç; kombinasyonlar her seferinde değişir.</p></div>
+        <div class="card"><div class="ic">4️⃣</div><h3>Patronu devir</h3><p>En uzak odada patron bekler. Parçalarını kır, fazlarını öğren, sonra sıradaki bölgeye.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap cols">
+      <div>
+        <strong style="color:var(--glow)">🎃 KABAK AVI — Sonbahar Büyücüsü</strong><br>
+        Tek dosyalık, bağımlılıksız tarayıcı oyunu · Sezon 2 (v2.0)
+      </div>
+      <div>
+        <a href="oyna.html">Oyna</a> · <a href="__GH__">GitHub</a> · <a href="__GH__#lisans">Lisans: MIT</a><br>
+        Canvas 2D + WebAudio · kurulum yok
+      </div>
+    </div>
+  </footer>
+</main>
+</body>
+</html>
