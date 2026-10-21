@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        getWindow().setBackgroundDrawableResource(R.color.bg);
+        getWindow().setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(BG_COLOR));
 
         web = new WebView(this);
         web.setBackgroundColor(BG_COLOR);
