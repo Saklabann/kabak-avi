@@ -5,6 +5,32 @@ Biçim: [Keep a Changelog](https://keepachangelog.com/tr/1.1.0/) · Sürümleme:
 
 ---
 
+## [2.1.0] — 2026-10-21 — 🎨 **Doku Yenilemesi + Android APK**
+
+### Eklendi
+
+- **Android APK:** oyun, tam ekran WebView sarmalayıcıyla APK olarak paketlendi (Android 6.0+, çevrimdışı, reklamsız).
+  İndirme: [kabak-avi.apk](https://github.com/Saklabann/kabak-avi/releases/latest/download/kabak-avi.apk)
+- `android/` altında derlenebilir Android projesi (Java + WebView, mipmap ikon seti, immersive tam ekran)
+
+### Değişti
+
+- **Zemin ve duvar dokuları yeniden üretildi:**
+  - fBm gürültüsüyle katmanlı taş / kaldırım / toprak zeminler; gren, çizik ve leke detayları
+  - 44×20 tuğla örgüsü, pahlı kenarlar ve harç gölgeleriyle taş duvarlar
+  - duvar diplerinde ortam gölgesi (AO), kapı koridorlarında ışık geçişi
+  - taş, yaprak, kabuk ve çakıl serpintileri; su birikintilerinde gökyüzü yansıması
+- **Dekorlar:** ağaç, çam, çalı, kabak, mantar, fıçı, sandık ve testi çizimleri derinlik ve gölgeyle yenilendi
+- Tüm dekor ve kırılabilirlerde yumuşak radyal gölge; vinyet %45 → %40
+- Biyom aydınlatması yumuşatıldı (bahçe 0.36 → 0.32, koru 0.47 → 0.42, tarla 0.55 → 0.48, vadi 0.60 → 0.53)
+- Arka planlar ekran yoğunluğuna göre (DPR) ön-render edilir; dokular yüksek çözünürlüklü ekranlarda net
+
+### Düzeltildi
+
+- Kapı geçişlerindeki aşırı karanlık yüzeyler ve zemin üzerindeki sert çapraz degrade
+
+---
+
 ## [2.0.0] — 2026-10-19 — 🍂 **Sezon 2 · Canlı Dünya**
 
 ### Eklendi

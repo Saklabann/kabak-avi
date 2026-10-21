@@ -5,14 +5,14 @@
 # 🎃 KABAK AVI — Sonbahar Büyücüsü
 
 **Tek dosyalık, prosedürel sonbahar temalı 2D aksiyon roguelite.**
-Tarayıcıda çalışır; kurulum, bağımlılık ve internet bağlantısı istemez.
+Tarayıcıda veya Android'de çalışır; kurulum, bağımlılık ve internet bağlantısı istemez.
 
-[![Sürüm](https://img.shields.io/badge/s%C3%BCr%C3%BCm-2.0%20%C2%B7%20Sezon%202-ff7a2f?style=for-the-badge)](CHANGELOG.md)
+[![Sürüm](https://img.shields.io/badge/s%C3%BCr%C3%BCm-2.1%20%C2%B7%20Sezon%202-ff7a2f?style=for-the-badge)](CHANGELOG.md)
 [![Lisans](https://img.shields.io/badge/lisans-MIT-3da639?style=for-the-badge)](LICENSE)
 [![Tek Dosya](https://img.shields.io/badge/tek%20dosya-ba%C4%9F%C4%B1ml%C4%B1l%C4%B1ks%C4%B1z-8b5cf6?style=for-the-badge)](oyna.html)
 [![Dil](https://img.shields.io/badge/dil-T%C3%BCrk%C3%A7e-ffb24a?style=for-the-badge)](#)
 
-[**▶ Hemen Oyna**](https://saklabann.github.io/kabak-avi/oyna.html) · [Ekranlar](#-ekran-görüntüleri) · [Kontroller](#%EF%B8%8F-kontroller) · [Hata Bildir](../../issues/new?template=bug_report.md) · [Öneri Ver](../../issues/new?template=feature_request.md)
+[**▶ Hemen Oyna**](https://saklabann.github.io/kabak-avi/oyna.html) · [**📱 Android APK**](https://github.com/Saklabann/kabak-avi/releases/latest/download/kabak-avi.apk) · [Ekranlar](#-ekran-görüntüleri) · [Kontroller](#%EF%B8%8F-kontroller) · [Hata Bildir](../../issues/new?template=bug_report.md) · [Öneri Ver](../../issues/new?template=feature_request.md)
 
 </div>
 
@@ -26,6 +26,7 @@ Tarayıcıda çalışır; kurulum, bağımlılık ve internet bağlantısı iste
 - [Kontroller](#%EF%B8%8F-kontroller)
 - [Nasıl oynanır](#-nasıl-oynanır)
 - [Çalıştırma](#-çalıştırma)
+- [Android (APK)](#-android-apk)
 - [Teknik mimari](#-teknik-mimari)
 - [Sürüm geçmişi](#-sürüm-geçmişi)
 - [Yol haritası](#-yol-haritası)
@@ -147,6 +148,21 @@ python -m http.server 8777
 
 ---
 
+## 📱 Android (APK)
+
+Oyunun tam ekran WebView sarmalayıcısıyla paketlenmiş Android sürümü:
+
+[**⬇ kabak-avi.apk indir**](https://github.com/Saklabann/kabak-avi/releases/latest/download/kabak-avi.apk)
+
+- Android 6.0 (API 23) ve üzeri
+- Çevrimdışı çalışır; internet izni istemez, reklam ve izleme yok
+- Yatay tam ekran, immersive mod, dokunmatik kontroller
+- Kurulum: APK'yı indir → "Bilinmeyen kaynaklara izin ver" → kur
+
+> APK debug anahtarıyla imzalanmıştır; yan yükleme (sideload) için uygundur. Kaynak proje `android/` klasöründedir.
+
+---
+
 ## 🛠️ Teknik mimari
 
 | Katman | Uygulama |
@@ -156,12 +172,15 @@ python -m http.server 8777
 | **Ses** | WebAudio ile sentezlenen müzik (doğal minör döngü) ve efektler; rüzgâr/yağmur döngü katmanları |
 | **Yapay zekâ** | 2. oyuncu botu: hedef önceliği, menzile göre konumlanma, mermiden kaçınma, otomatik dash |
 | **Durum** | `STATE` makinesi (MENU/PLAY/RELIC/DEAD/SHOP/PAUSE/MAP), `localStorage` kaydı + göç (migration) |
-| **Boyut** | Tek `oyna.html` dosyası, ~250 KB, harici istek yok |
+| **Boyut** | Tek `oyna.html` dosyası, ~295 KB, harici istek yok |
 
 ```
 kabak-avi/
 ├─ index.html                 # tanıtım sayfası (GitHub Pages)
 ├─ oyna.html                  # OYUN — tek dosya, bağımlılıksız
+├─ android/                   # Android APK projesi (Java + WebView)
+│  ├─ app/src/main/            #   manifest, MainActivity, ikonlar
+│  └─ build.gradle             #   AGP 8.2 · compileSdk 34 · minSdk 23
 ├─ assets/
 │  ├─ social-preview.jpg      # repo sosyal önizleme görseli
 │  └─ screens/                # ekran görüntüleri
@@ -179,6 +198,7 @@ Ayrıntılar için [CHANGELOG.md](CHANGELOG.md).
 
 | Sürüm | Ad | Özet |
 |:--|:--|:--|
+| **v2.1.0** | **Doku Yenilemesi** | fBm dokulu zeminler, taş örgü duvarlar, yumuşak gölgeler ve derinlikli dekorlar + **Android APK** |
 | **v2.0.0** | **Sezon 2 · Canlı Dünya** | Elit rütbeler, gizli odalar, yeni düşmanlar (hayalet, mantar), canlı ortam (şimşek, kuşlar, ateşböcekleri, Bilge Baykuş, sincaplar), ortam sesleri, ayarlar ve 15 başarım |
 | v1.0.0 | Sezon 1 | Temel roguelite döngüsü, 4 biyom + 4 patron, yadigârlar, Voidigo sistemleri, yerel kooperatif |
 
