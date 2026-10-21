@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KABAK AVI — Sonbahar Büyücüsü · Tarayıcıda 2D Aksiyon Roguelite</title>
-<meta name="description" content="KABAK AVI — Sonbahar Büyücüsü: tek dosyalık, prosedürel sonbahar temalı 2D aksiyon roguelite. Silah düşür-değiştir-fırlat, parçalanabilir patronlar, yolsuzluk zinciri, av haritası ve yerel 2 kişilik kooperatif. Kurulum yok, tarayıcıda oyna.">
+<meta name="description" content="KABAK AVI — Sonbahar Büyücüsü: tek dosyalık, prosedürel sonbahar temalı 2D aksiyon roguelite. Silah düşür-değiştir-fırlat, parçalanabilir patronlar, yolsuzluk zinciri, av haritası ve yerel 2 kişilik kooperatif. Kurulum yok; tarayıcıda veya Android APK ile oyna.">
 <meta name="theme-color" content="#120a05">
 <meta property="og:type" content="website">
 <meta property="og:title" content="KABAK AVI — Sonbahar Büyücüsü">
-<meta property="og:description" content="Tek dosyalık, prosedürel sonbahar temalı 2D aksiyon roguelite. Kurulum yok — tarayıcıda oyna.">
+<meta property="og:description" content="Tek dosyalık, prosedürel sonbahar temalı 2D aksiyon roguelite. Kurulum yok — tarayıcıda oyna ya da Android APK indir.">
 <meta property="og:image" content="assets/screens/bahce.jpg">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.92em' font-size='88'>🎃</text></svg>">
 <style>
@@ -105,6 +105,11 @@
     .keys{grid-template-columns:1fr}
     nav .mid{display:none}
   }
+  @media(max-width:430px){
+    nav{gap:10px}
+    nav .btn.ghost{display:none}
+    nav .btn{padding:9px 14px}
+  }
 </style>
 </head>
 <body>
@@ -132,9 +137,9 @@
   <div class="hero">
     <div class="wrap hero-grid">
       <div>
-        <span class="kicker">TEK DOSYA · KURULUM YOK · TÜRKÇE</span>
+        <span class="kicker">TEK DOSYA · TARAYICI + ANDROID · TÜRKÇE</span>
         <h1>KABAK AVI<br>Sonbahar Büyücüsü</h1>
-        <p class="sub">Prosedürel üretilen balkabağı diyarlarında geçen, tarayıcıda çalışan 2D aksiyon roguelite.
+        <p class="sub">Prosedürel üretilen balkabağı diyarlarında geçen, tarayıcıda veya Android'de çalışan 2D aksiyon roguelite.
           Silahını al, düşmandan kap, tükenince fırlat. Patronların parçalarını kır, yolsuzluğu zincirle, av haritasından
           bir sonraki bölgeyi seç. İstersen yanına bir yoldaş al — yerel 2 kişilik!</p>
         <div class="cta">
